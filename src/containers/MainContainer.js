@@ -46,7 +46,7 @@ class MainContainer extends Component {
   }
 
   displayStocks = ()  =>{
-    let stocks = this.state.stocks
+    let stocks = [...this.state.stocks]
     if (this.state.filter !== "All"){
       stocks = stocks.filter(stock => stock.type === this.state.filter)
     }

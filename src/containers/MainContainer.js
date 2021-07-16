@@ -37,6 +37,30 @@ class MainContainer extends Component {
     })
   }
 
+  updateFilter = type  => {
+    this.setState({ filter: type })
+  }
+
+  updateSort = sortBy => {
+    this.setState({ sort: sortBy })
+  }
+
+  displayStocks = ()  =>{
+    let stocks = this.state.stocks
+    if (this.state.filter !== "All"){
+      stocks = stocks.filter(stock => stock.type === this.state.filter)
+    }
+
+    switch(this.state.sort){
+      case "Alphabetically":
+        return stocks.sort((a,b) => a.name > b.name ? 1 : -1)
+      case "Price":
+          return stocks.sort((a,b) => a.price > b.price ? 1 : -1)
+      default:
+        return stocks
+    }
+
+  }
 
 
   render() {

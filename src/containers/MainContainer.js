@@ -33,7 +33,7 @@ class MainContainer extends Component {
   // remove stock from portfolioId
   removeStock = (id) => {
     this.setState({
-      portfolioIds: this.state.portfolioIds.filter(stock => stock !==id)
+      portfolioIds: this.state.portfolioIds.filter(pId => pId !== id)
     })
   }
 
@@ -64,19 +64,22 @@ class MainContainer extends Component {
 
 
   render() {
+    let portfolioStocks = this.state.portfolioIds.map(id => this.state.stocks.find(stock => stock.id === id))
+    let stocks = this.displayStocks()
+
     return (
       <div>
-        <SearchBar/>
+        <SearchBar filter = {this.state.filter} sort = {this.state.sort} updateFilter ={this.updateFilter} updateSort = {this.updateSort} />
 
           <div className="row">
             <div className="col-8">
 
-              <StockContainer />
+              <StockContainer stocks={stocks} addPortfolioId = {this.addPortfolioId}/>
 
             </div>
             <div className="col-4">
 
-              <PortfolioContainer/>
+              <PortfolioContainer stocks = {portfolioStocks} removeStock={this.removeStock}/>
 
             </div>
           </div>

@@ -5,6 +5,20 @@ import SearchBar from '../components/SearchBar'
 
 class MainContainer extends Component {
 
+  state = {
+    // to save fetched data
+    stocks: []
+  }
+
+  // fetch data
+  componentDidMount(){
+    fetch("http://localhost:3000/stocks")
+    .then(response => response.json())
+    .then(data => {
+      this.setState({stocks: data})
+    })
+  }
+
   render() {
     return (
       <div>
